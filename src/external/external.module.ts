@@ -1,21 +1,22 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource, DataSourceOptions } from 'typeorm';
+import { MapsService } from '@core/shared/ports/maps';
 import { DatabaseService } from '@external/database/services';
 import { dataSource } from '@external/database/typeorm/config';
+import { FileStorageService } from '@core/shared/ports/storage';
+import { PersonRepository } from '@core/person/ports/repository';
 import { GoogleMapsService } from '@external/maps/google/services';
+import { CompanyRepository } from '@core/company/ports/repository';
+
 import {
   SupaBaseClientService,
   SupaBaseFileStorageService,
 } from '@external/storage/supabase';
-import { FileStorageService } from '@core/shared/ports/storage';
-import { PersonRepository } from '@core/person/ports/repository';
-import { CompanyRepository } from '@core/company/ports/repository';
 import {
   TypeORMPersonRepository,
   TypeORMCompanyRepository,
 } from '@external/database/typeorm/repositories';
-import { MapsService } from '@core/shared/ports/maps';
 
 @Module({
   imports: [

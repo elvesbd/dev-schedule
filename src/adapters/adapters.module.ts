@@ -1,7 +1,11 @@
 import { Module } from '@nestjs/common';
+import { MapsService } from '@core/shared/ports/maps';
 import { ExternalModule } from '@external/external.module';
 import { PersonController } from '@adapters/controllers/person';
+import { FileStorageService } from '@core/shared/ports/storage';
+import { PersonRepository } from '@core/person/ports/repository';
 import { CompanyController } from '@adapters/controllers/company';
+import { CompanyRepository } from '@core/company/ports/repository';
 import {
   DeleteCompanyUseCase,
   EditCompanyUseCase,
@@ -16,10 +20,6 @@ import {
   RegisterPersonUseCase,
   SearchAdvancedPersonUseCase,
 } from '@core/person/usecases';
-import { PersonRepository } from '@core/person/ports/repository';
-import { FileStorageService } from '@core/shared/ports/storage';
-import { MapsService } from '@core/shared/ports/maps';
-import { CompanyRepository } from '@core/company/ports/repository';
 
 @Module({
   imports: [ExternalModule],
