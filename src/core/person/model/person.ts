@@ -56,7 +56,7 @@ export class Person extends BaseEntity {
     return person;
   }
 
-  public update(input: PersonProps): void {
+  public update(input: Partial<PersonProps>): void {
     this._name = new Name(input.name);
     this._email = new Email(input.email);
     this._dateOfBirth = input.dateOfBirth;

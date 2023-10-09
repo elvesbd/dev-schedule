@@ -8,5 +8,4 @@ export type EditCompany = {
   contactPerson: string;
   contactNumbers: EditCompanyContactNumbers;
   address: EditAddress;
-  profilePhotoPath: string;
 };

@@ -90,7 +90,7 @@ export class PersonController {
   @UseInterceptors(FileInterceptor('file'))
   @Post()
   async registerPerson(
-    @Body() dto: RegisterPersonDto,
+    @Body('dto') dto: RegisterPersonDto,
     @UploadedFile() file: FileDto,
   ): Promise<PersonVMResponse> {
     const person = await this.registerPersonUseCase.handle(dto, file);

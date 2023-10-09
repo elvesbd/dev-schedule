@@ -25,7 +25,4 @@ export class EditCompanyDto {
 
   @ApiProperty()
   address: EditAddressDto;
-
-  @ApiProperty()
-  profilePhotoPath: string;
 }

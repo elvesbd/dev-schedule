@@ -10,5 +10,4 @@ export type EditPersonInput = {
   contactNumbers: ContactNumbers;
   address: EditAddress;
   employer?: string;
-  profilePhotoPath: string;
 };

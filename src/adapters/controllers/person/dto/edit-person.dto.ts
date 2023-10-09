@@ -29,7 +29,4 @@ export class EditPersonDto {
 
   @ApiProperty()
   employer?: string;
-
-  @ApiProperty()
-  profilePhotoPath: string;
 }

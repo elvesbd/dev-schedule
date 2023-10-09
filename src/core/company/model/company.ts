@@ -54,7 +54,7 @@ export class Company extends BaseEntity {
     return person;
   }
 
-  public update(input: CompanyProps): void {
+  public update(input: Partial<CompanyProps>): void {
     this._name = new Name(input.name);
     this._tradeName = input.tradeName;
     this._email = new Email(input.email);

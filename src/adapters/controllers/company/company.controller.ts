@@ -90,13 +90,13 @@ export class CompanyController {
   @UseInterceptors(FileInterceptor('file'))
   @Post()
   async registerCompany(
-    @Body() registerCompanyDto: RegisterCompanyDto,
+    @Body('dto') dto: any,
     @UploadedFile() file: FileDto,
   ): Promise<CompanyVMResponse> {
-    const company = await this.registerCompanyUseCase.handle(
-      registerCompanyDto,
-      file,
-    );
+    const dtoJSON = JSON.parse(dto);
+
+    console.log(dtoJSON);
+    const company = await this.registerCompanyUseCase.handle(dtoJSON, file);
     return CompanyViewModel.toHTTP(company);
   }
 
@@ -107,9 +107,9 @@ export class CompanyController {
   @Put(':id')
   async editCompany(
     @Param('id') id: string,
-    @Body() editCompanyDto: EditCompanyDto,
+    @Body() dto: EditCompanyDto,
   ): Promise<CompanyVMResponse> {
-    const company = await this.editCompanyUseCase.handle(id, editCompanyDto);
+    const company = await this.editCompanyUseCase.handle(id, dto);
     return CompanyViewModel.toHTTP(company);
   }
 
@@ -122,9 +122,9 @@ export class CompanyController {
   @Patch(':id/photo')
   async editProfilePhoto(
     @Param('id') id: string,
-    @UploadedFile() fileDto: FileDto,
+    @UploadedFile() dto: FileDto,
   ): Promise<void> {
-    return await this.editLogoPhotoUseCase.handle(id, fileDto);
+    return await this.editLogoPhotoUseCase.handle(id, dto);
   }
 
   @ApiOperation({ summary: 'delete company' })

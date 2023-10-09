@@ -20,12 +20,27 @@ import {
   RegisterPersonUseCase,
   SearchAdvancedPersonUseCase,
 } from '@core/person/usecases';
+import { ProfilePhotoService } from '@core/services';
+import { AddressService } from '@core/services/address.service';
 
 @Module({
   imports: [ExternalModule],
   controllers: [PersonController, CompanyController],
   providers: [
     // person
+    {
+      provide: AddressService,
+      useFactory: (mapsService: MapsService): AddressService =>
+        new AddressService(mapsService),
+      inject: [MapsService],
+    },
+    {
+      provide: ProfilePhotoService,
+      useFactory: (
+        fileStorageService: FileStorageService,
+      ): ProfilePhotoService => new ProfilePhotoService(fileStorageService),
+      inject: [FileStorageService],
+    },
     {
       provide: DeletePersonUseCase,
       useFactory: (
@@ -38,34 +53,39 @@ import {
     {
       provide: EditPersonUseCase,
       useFactory: (
-        mapsService: MapsService,
+        addressService: AddressService,
         personRepository: PersonRepository,
       ): EditPersonUseCase =>
-        new EditPersonUseCase(mapsService, personRepository),
-      inject: [MapsService, PersonRepository],
+        new EditPersonUseCase(addressService, personRepository),
+      inject: [AddressService, PersonRepository],
     },
     {
       provide: EditProfilePhotoUseCase,
       useFactory: (
         personRepository: PersonRepository,
         fileStorageService: FileStorageService,
+        profilePhotoService: ProfilePhotoService,
       ): EditProfilePhotoUseCase =>
-        new EditProfilePhotoUseCase(personRepository, fileStorageService),
-      inject: [PersonRepository, FileStorageService],
+        new EditProfilePhotoUseCase(
+          personRepository,
+          fileStorageService,
+          profilePhotoService,
+        ),
+      inject: [PersonRepository, FileStorageService, ProfilePhotoService],
     },
     {
       provide: RegisterPersonUseCase,
       useFactory: (
         personRepository: PersonRepository,
         mapsService: MapsService,
-        fileStorageService: FileStorageService,
+        profilePhotoService: ProfilePhotoService,
       ): RegisterPersonUseCase =>
         new RegisterPersonUseCase(
           mapsService,
           personRepository,
-          fileStorageService,
+          profilePhotoService,
         ),
-      inject: [PersonRepository, MapsService, FileStorageService],
+      inject: [PersonRepository, MapsService, ProfilePhotoService],
     },
     {
       provide: SearchAdvancedPersonUseCase,
@@ -88,34 +108,39 @@ import {
     {
       provide: EditCompanyUseCase,
       useFactory: (
-        mapsService: MapsService,
+        addressService: AddressService,
         companyRepository: CompanyRepository,
       ): EditCompanyUseCase =>
-        new EditCompanyUseCase(mapsService, companyRepository),
-      inject: [MapsService, CompanyRepository],
+        new EditCompanyUseCase(addressService, companyRepository),
+      inject: [AddressService, CompanyRepository],
     },
     {
       provide: EditLogoPhotoUseCase,
       useFactory: (
         companyRepository: CompanyRepository,
         fileStorageService: FileStorageService,
+        profilePhotoService: ProfilePhotoService,
       ): EditLogoPhotoUseCase =>
-        new EditLogoPhotoUseCase(companyRepository, fileStorageService),
-      inject: [CompanyRepository, FileStorageService],
+        new EditLogoPhotoUseCase(
+          companyRepository,
+          fileStorageService,
+          profilePhotoService,
+        ),
+      inject: [CompanyRepository, FileStorageService, ProfilePhotoService],
     },
     {
       provide: RegisterCompanyUseCase,
       useFactory: (
         mapService: MapsService,
         companyRepository: CompanyRepository,
-        fileStorageService: FileStorageService,
+        profilePhotoService: ProfilePhotoService,
       ): RegisterCompanyUseCase =>
         new RegisterCompanyUseCase(
           mapService,
           companyRepository,
-          fileStorageService,
+          profilePhotoService,
         ),
-      inject: [MapsService, CompanyRepository, FileStorageService],
+      inject: [MapsService, CompanyRepository, ProfilePhotoService],
     },
     {
       provide: SearchAdvancedCompanyUseCase,

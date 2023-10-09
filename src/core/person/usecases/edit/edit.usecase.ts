@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { Person } from '@core/person/model';
-import { MapsService } from '@core/shared/ports/maps';
 import { PersonRepository } from '@core/person/ports/repository';
 import { PersonNotFoundException } from '@core/person/exceptions';
 import { EditPersonInput } from '@core/person/usecases/edit/types';
+import { AddressService } from '@core/services/address.service';
 
 @Injectable()
 export class EditPersonUseCase {
   constructor(
-    private readonly mapsService: MapsService,
+    private readonly addressService: AddressService,
     private readonly personRepository: PersonRepository,
   ) {}
 
@@ -16,12 +16,15 @@ export class EditPersonUseCase {
     const person = await this.personRepository.searchById(id);
     if (!person) throw new PersonNotFoundException(id);
 
-    let coordinates: { lng: number; lat: number };
     const { address } = input;
-    if (person.getAddress.changedAddress(address)) {
-      coordinates = await this.mapsService.getCoordinates(address);
+    const updatedAddress = await this.addressService.updateCoordinatesIfChanged(
+      person,
+      address,
+      (entity: Person) => entity.getAddress,
+    );
+    if (updatedAddress) {
+      input.address = updatedAddress;
     }
-    address.coordinates = coordinates ?? address.coordinates;
 
     person.update(input);
     await this.personRepository.update(person);
