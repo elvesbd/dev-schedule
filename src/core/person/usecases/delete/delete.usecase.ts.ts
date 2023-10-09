@@ -14,7 +14,7 @@ export class DeletePersonUseCase {
     const person = await this.personRepository.searchById(id);
     if (!person) throw new PersonNotFoundException(id);
 
-    await this.fileStorageService.remove(person.profilePhotoPath.value);
+    await this.fileStorageService.remove(person.getProfilePhotoPath);
     await this.personRepository.delete(id);
   }
 }

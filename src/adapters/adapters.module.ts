@@ -42,7 +42,7 @@ import {
         personRepository: PersonRepository,
       ): EditPersonUseCase =>
         new EditPersonUseCase(mapsService, personRepository),
-      inject: [PersonRepository, MapsService],
+      inject: [MapsService, PersonRepository],
     },
     {
       provide: EditProfilePhotoUseCase,
@@ -92,7 +92,7 @@ import {
         companyRepository: CompanyRepository,
       ): EditCompanyUseCase =>
         new EditCompanyUseCase(mapsService, companyRepository),
-      inject: [CompanyRepository, MapsService],
+      inject: [MapsService, CompanyRepository],
     },
     {
       provide: EditLogoPhotoUseCase,
@@ -115,7 +115,7 @@ import {
           companyRepository,
           fileStorageService,
         ),
-      inject: [CompanyRepository, MapsService, FileStorageService],
+      inject: [MapsService, CompanyRepository, FileStorageService],
     },
     {
       provide: SearchAdvancedCompanyUseCase,

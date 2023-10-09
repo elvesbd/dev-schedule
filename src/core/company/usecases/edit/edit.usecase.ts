@@ -19,18 +19,13 @@ export class EditCompanyUseCase {
     let coordinates: { lng: number; lat: number };
     const { address } = input;
 
-    if (company.address.addressChanged(address)) {
+    if (company.getAddress.changedAddress(address)) {
       coordinates = await this.mapsService.getCoordinates(address);
     }
     address.coordinates = coordinates ?? address.coordinates;
 
-    const updatedCompany = company.update({
-      id,
-      ...input,
-      createdAt: company.createdAt,
-    });
-    await this.companyRepository.update(updatedCompany);
-
-    return updatedCompany;
+    company.update(input);
+    await this.companyRepository.update(company);
+    return company;
   }
 }

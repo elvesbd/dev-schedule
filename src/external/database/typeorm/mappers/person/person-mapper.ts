@@ -4,32 +4,32 @@ import { TypeORMPersonEntity } from '@external/database/typeorm/entities';
 export class PersonMapper {
   static toPersistent(person: Person): TypeORMPersonEntity {
     const persistentEntity: TypeORMPersonEntity = {
-      id: person.id.value,
-      name: person.name.value,
-      email: person.email.value,
-      dateOfBirth: person.dateOfBirth,
-      gender: person.gender,
-      profession: person.profession,
-      whatsAppNumber: person.contactNumbers.whatsAppNumber,
-      mobileNumber: person.contactNumbers.mobileNumber,
-      street: person.address.street,
-      number: person.address.number,
-      city: person.address.city,
-      state: person.address.state,
-      postalCode: person.address.postalCode,
-      country: person.address.country,
-      profilePhotoPath: person.profilePhotoPath.value,
-      employer: person.employer,
-      createdAt: person.createdAt,
+      id: person.id.getValue,
+      name: person.getName,
+      email: person.getEmail,
+      dateOfBirth: person.getDateOfBirth,
+      gender: person.getGender,
+      profession: person.getProfession,
+      whatsAppNumber: person.getContactNumbers.whatsAppNumber,
+      mobileNumber: person.getContactNumbers.mobileNumber,
+      street: person.getAddress.street,
+      number: person.getAddress.number,
+      city: person.getAddress.city,
+      state: person.getAddress.state,
+      postalCode: person.getAddress.postalCode,
+      country: person.getAddress.country,
+      profilePhotoPath: person.getProfilePhotoPath,
+      employer: person.getEmployer,
+      createdAt: person.getCreatedAt,
       updatedAt: person.getUpdatedAt,
     };
 
     if (
-      person.address.coordinates?.lng !== undefined &&
-      person.address.coordinates?.lat !== undefined
+      person.getAddress.coordinates?.lng !== undefined &&
+      person.getAddress.coordinates?.lat !== undefined
     ) {
-      persistentEntity.lng = person.address.coordinates.lng;
-      persistentEntity.lat = person.address.coordinates.lat;
+      persistentEntity.lng = person.getAddress.coordinates.lng;
+      persistentEntity.lat = person.getAddress.coordinates.lat;
     }
     return persistentEntity;
   }

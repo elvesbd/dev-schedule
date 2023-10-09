@@ -103,18 +103,6 @@ export class TypeORMCompanyRepository implements CompanyRepository {
     }
   }
 
-  async updatePhotoProfile(
-    id: string,
-    profilePhotoPath: string,
-  ): Promise<void> {
-    try {
-      await this.repository.update(id, { profilePhotoPath });
-    } catch (error) {
-      this.logger.error(error.message);
-      throw new InternalServerErrorException();
-    }
-  }
-
   async delete(id: string): Promise<void> {
     try {
       await this.repository.delete(id);

@@ -9,9 +9,5 @@ export abstract class CompanyRepository {
   ): Promise<PaginationResult<Company>>;
   abstract register(company: Company): Promise<void>;
   abstract update(company: Company): Promise<void>;
-  abstract updatePhotoProfile(
-    id: string,
-    profilePhotoPath: string,
-  ): Promise<void>;
   abstract delete(id: string): Promise<void>;
 }

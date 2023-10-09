@@ -1,1 +1,1 @@
-export { Company } from './company';
+export { Company, CompanyProps } from './company';

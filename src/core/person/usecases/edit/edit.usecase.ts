@@ -18,17 +18,13 @@ export class EditPersonUseCase {
 
     let coordinates: { lng: number; lat: number };
     const { address } = input;
-    if (person.address.addressChanged(address)) {
+    if (person.getAddress.changedAddress(address)) {
       coordinates = await this.mapsService.getCoordinates(address);
     }
     address.coordinates = coordinates ?? address.coordinates;
 
-    const updatedPerson = person.update({
-      id,
-      ...input,
-      createdAt: person.createdAt,
-    });
-    await this.personRepository.update(updatedPerson);
-    return updatedPerson;
+    person.update(input);
+    await this.personRepository.update(person);
+    return person;
   }
 }

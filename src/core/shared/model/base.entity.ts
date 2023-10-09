@@ -8,6 +8,6 @@ export abstract class BaseEntity {
   }
 
   isEqual(entity: BaseEntity): boolean {
-    return this.id.value === entity.id.value;
+    return this.id.getValue === entity.id.getValue;
   }
 }

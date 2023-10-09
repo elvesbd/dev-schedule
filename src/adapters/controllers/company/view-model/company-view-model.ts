@@ -52,30 +52,30 @@ export class CompanyVMResponse {
 export class CompanyViewModel {
   public static toHTTP(company: Company): CompanyVMResponse {
     return {
-      id: company.id.value,
-      name: company.name.value,
-      tradeName: company.tradeName,
-      email: company.email.value,
-      cnpj: company.cnpj.value,
-      contactPerson: company.contactPerson,
+      id: company.id.getValue,
+      name: company.getName,
+      tradeName: company.getTradeName,
+      email: company.getEmail,
+      cnpj: company.getCnpj,
+      contactPerson: company.getContactPerson,
       contactNumbers: {
-        whatsAppNumber: company.contactNumbers.whatsAppNumber,
-        mobileNumber: company.contactNumbers.mobileNumber,
-        landlinePhone: company.contactNumbers.landlinePhone,
+        whatsAppNumber: company.getContactNumbers.whatsAppNumber,
+        mobileNumber: company.getContactNumbers.mobileNumber,
+        landlinePhone: company.getContactNumbers.landlinePhone,
       },
       address: {
-        street: company.address.street,
-        number: company.address.number,
-        city: company.address.city,
-        state: company.address.state,
-        postalCode: company.address.postalCode,
-        country: company.address.country,
+        street: company.getAddress.street,
+        number: company.getAddress.number,
+        city: company.getAddress.city,
+        state: company.getAddress.state,
+        postalCode: company.getAddress.postalCode,
+        country: company.getAddress.country,
         coordinates: {
-          lng: company.address.coordinates.lng,
-          lat: company.address.coordinates.lat,
+          lng: company.getAddress.coordinates.lng,
+          lat: company.getAddress.coordinates.lat,
         },
       },
-      profilePhotoPath: company.profilePhotoPath.value,
+      profilePhotoPath: company.getProfilePhotoPath,
     };
   }
 }

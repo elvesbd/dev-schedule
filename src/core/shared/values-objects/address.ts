@@ -85,7 +85,7 @@ export class Address {
     );
   }
 
-  public addressChanged(newAddress: Partial<Address>): boolean {
+  public changedAddress(newAddress: Partial<Address>): boolean {
     return !this.isEqual(newAddress);
   }
 }

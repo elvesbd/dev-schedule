@@ -9,9 +9,5 @@ export abstract class PersonRepository {
   ): Promise<PaginationResult<Person>>;
   abstract register(person: Person): Promise<void>;
   abstract update(person: Person): Promise<void>;
-  abstract updatePhotoProfile(
-    id: string,
-    profilePhotoPath: string,
-  ): Promise<void>;
   abstract delete(id: string): Promise<void>;
 }

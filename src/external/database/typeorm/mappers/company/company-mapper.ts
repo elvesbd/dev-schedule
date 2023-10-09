@@ -4,34 +4,34 @@ import { TypeORMCompanyEntity } from '@external/database/typeorm/entities';
 export class CompanyMapper {
   static toPersistent(company: Company): TypeORMCompanyEntity {
     const persistentEntity: TypeORMCompanyEntity = {
-      id: company.id.value,
-      name: company.name.value,
-      tradeName: company.tradeName,
-      email: company.email.value,
-      cnpj: company.cnpj.value,
-      contactPerson: company.contactPerson,
-      whatsAppNumber: company.contactNumbers.whatsAppNumber,
-      mobileNumber: company.contactNumbers.mobileNumber,
-      landlinePhone: company.contactNumbers.landlinePhone,
-      street: company.address.street,
-      number: company.address.number,
-      city: company.address.city,
-      state: company.address.state,
-      postalCode: company.address.postalCode,
-      country: company.address.country,
-      lng: company.address.coordinates.lat,
-      lat: company.address.coordinates.lat,
-      profilePhotoPath: company.profilePhotoPath.value,
-      createdAt: company.createdAt,
+      id: company.id.getValue,
+      name: company.getName,
+      tradeName: company.getTradeName,
+      email: company.getEmail,
+      cnpj: company.getCnpj,
+      contactPerson: company.getContactPerson,
+      whatsAppNumber: company.getContactNumbers.whatsAppNumber,
+      mobileNumber: company.getContactNumbers.mobileNumber,
+      landlinePhone: company.getContactNumbers.landlinePhone,
+      street: company.getAddress.street,
+      number: company.getAddress.number,
+      city: company.getAddress.city,
+      state: company.getAddress.state,
+      postalCode: company.getAddress.postalCode,
+      country: company.getAddress.country,
+      lng: company.getAddress.coordinates.lat,
+      lat: company.getAddress.coordinates.lat,
+      profilePhotoPath: company.getProfilePhotoPath,
+      createdAt: company.getCreatedAt,
       updatedAt: company.getUpdatedAt,
     };
 
     if (
-      company.address.coordinates?.lng !== undefined &&
-      company.address.coordinates?.lat !== undefined
+      company.getAddress.coordinates?.lng !== undefined &&
+      company.getAddress.coordinates?.lat !== undefined
     ) {
-      persistentEntity.lng = company.address.coordinates.lng;
-      persistentEntity.lat = company.address.coordinates.lat;
+      persistentEntity.lng = company.getAddress.coordinates.lng;
+      persistentEntity.lat = company.getAddress.coordinates.lat;
     }
     return persistentEntity;
   }

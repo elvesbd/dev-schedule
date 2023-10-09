@@ -14,7 +14,7 @@ export class DeleteCompanyUseCase {
     const person = await this.companyRepository.searchById(id);
     if (!person) throw new CompanyNotFoundException(id);
 
-    await this.fileStorageService.remove(person.profilePhotoPath.value);
+    await this.fileStorageService.remove(person.getProfilePhotoPath);
     await this.companyRepository.delete(id);
   }
 }

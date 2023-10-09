@@ -16,13 +16,11 @@ export class EditLogoPhotoUseCase {
     const company = await this.companyRepository.searchById(id);
     if (!company) throw new CompanyNotFoundException(id);
 
-    await this.fileStorageService.remove(company.profilePhotoPath.value);
+    await this.fileStorageService.remove(company.getProfilePhotoPath);
     const path = await this.fileStorageService.upload(input, COMPANY_FOLDER);
     const profilePhotoPath = await this.fileStorageService.getUrl(path);
 
-    return await this.companyRepository.updatePhotoProfile(
-      id,
-      profilePhotoPath,
-    );
+    company.updateProfilePhotoPath(profilePhotoPath);
+    await this.companyRepository.update(company);
   }
 }

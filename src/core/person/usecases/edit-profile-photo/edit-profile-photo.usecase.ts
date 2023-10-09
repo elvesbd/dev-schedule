@@ -16,10 +16,11 @@ export class EditProfilePhotoUseCase {
     const person = await this.personRepository.searchById(id);
     if (!person) throw new PersonNotFoundException(id);
 
-    await this.fileStorageService.remove(person.profilePhotoPath.value);
+    await this.fileStorageService.remove(person.getProfilePhotoPath);
     const path = await this.fileStorageService.upload(input, PERSON_FOLDER);
     const profilePhotoPath = await this.fileStorageService.getUrl(path);
 
-    await this.personRepository.updatePhotoProfile(id, profilePhotoPath);
+    person.updateProfilePhotoPath(profilePhotoPath);
+    await this.personRepository.update(person);
   }
 }
