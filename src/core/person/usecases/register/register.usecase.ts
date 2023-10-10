@@ -16,25 +16,22 @@ export class RegisterPersonUseCase {
     private readonly profilePhotoService: ProfilePhotoService,
   ) {}
 
-  async handle(input: RegisterPerson, fileInput: FileInput): Promise<any> {
-    const foundPerson = await this.personRepository.searchByEmail(input.email);
-    if (foundPerson) throw new PersonAlreadyRegisterException(input.email);
+  async handle(input: RegisterPerson, fileInput: FileInput): Promise<Person> {
+    const { email, address } = input;
+    const foundPerson = await this.personRepository.searchByEmail(email);
+    if (foundPerson) throw new PersonAlreadyRegisterException(email);
 
     const profilePhotoPath = await this.profilePhotoService.getUrl(
       fileInput,
       PERSON_FOLDER,
     );
 
-    const coordinates = await this.mapService.getCoordinates(input.address);
-    const addressWithCoordinates = {
-      ...input.address,
-      coordinates,
-    };
+    const coordinates = await this.mapService.getCoordinates(address);
 
     const person = Person.create({
       profilePhotoPath,
       ...input,
-      address: addressWithCoordinates,
+      address: { ...address, coordinates },
     });
     await this.personRepository.register(person);
     return person;

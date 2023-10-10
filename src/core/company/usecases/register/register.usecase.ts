@@ -17,24 +17,21 @@ export class RegisterCompanyUseCase {
   ) {}
 
   async handle(input: RegisterCompany, fileInput: FileInput): Promise<Company> {
-    const foundCompany = await this.companyRepository.searchByCnpj(input.cnpj);
-    if (foundCompany) throw new CompanyAlreadyRegisterException(input.cnpj);
+    const { cnpj, address } = input;
+    const foundCompany = await this.companyRepository.searchByCnpj(cnpj);
+    if (foundCompany) throw new CompanyAlreadyRegisterException(cnpj);
 
     const profilePhotoPath = await this.profilePhotoService.getUrl(
       fileInput,
       COMPANY_FOLDER,
     );
 
-    const coordinates = await this.mapService.getCoordinates(input.address);
-    const addressWithCoordinates = {
-      ...input.address,
-      coordinates,
-    };
+    const coordinates = await this.mapService.getCoordinates(address);
 
     const company = Company.create({
       profilePhotoPath,
       ...input,
-      address: addressWithCoordinates,
+      address: { ...address, coordinates },
     });
     await this.companyRepository.register(company);
     return company;
