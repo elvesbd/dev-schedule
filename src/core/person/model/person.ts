@@ -10,7 +10,7 @@ import {
   ContactNumbersProps,
 } from '@core/shared/values-objects';
 
-type PersonProps = {
+export type PersonProps = {
   id?: string;
   name: string;
   email: string;
@@ -22,6 +22,7 @@ type PersonProps = {
   profilePhotoPath: string;
   employer?: string;
   createdAt?: Date;
+  updatedAt?: Date;
 };
 export class Person extends BaseEntity {
   private _name: Name;
@@ -49,6 +50,7 @@ export class Person extends BaseEntity {
     this._profilePhotoPath = new PhotoProfilePath(props.profilePhotoPath);
     this._employer = props.employer;
     this._createdAt = props.createdAt || new Date();
+    this._updatedAt = null;
   }
 
   static create(personData: PersonProps) {

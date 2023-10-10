@@ -2,36 +2,125 @@ import { Company } from '@core/company/model';
 import { CompanyDataBuilderProps } from '../data-builder';
 
 describe('Company [entity]', (): void => {
-  let company: Company;
+  const companyProps = CompanyDataBuilderProps.aCompany().build();
+  const company = Company.create(companyProps);
 
   beforeEach(() => {
-    const companyProps = CompanyDataBuilderProps.aCompany().build();
-    company = new Company(companyProps);
+    jest.clearAllMocks();
   });
 
-  /* it('should register a Company', (): void => {
+  it('should register a Company', (): void => {
     expect(company.id).toBeDefined();
-    expect(company.name.value).toBe(company.name);
-    expect(company.tradeName).toBe(company.tradeName);
-    expect(company.email.value).toBe(company.email);
-    expect(company.cnpj.value).toBe(company.cnpj);
-    expect(company.contactPerson).toBe(company.contactPerson);
-    expect(company.contactNumbers).toEqual(company.contactNumbers);
-    expect(company.address).toEqual(company.address);
-    expect(company.profilePhotoPath.value).toBe(company.profilePhotoPath);
-  }); */
-
-  it('should update a Company', (): void => {
-    expect(company.id).toBeDefined();
-    expect(company.name).toBe('John Doe');
-    expect(company.email).toBe('johndoe@gmail.com');
+    expect(company.getName).toBe(companyProps.name);
+    expect(company.getTradeName).toBe(companyProps.tradeName);
+    expect(company.getEmail).toBe(companyProps.email);
+    expect(company.getCnpj).toBe(companyProps.cnpj);
+    expect(company.getContactPerson).toBe(companyProps.contactPerson);
+    expect(company.getContactNumbers).toEqual(companyProps.contactNumbers);
+    expect(company.getAddress).toEqual(companyProps.address);
+    expect(company.getProfilePhotoPath).toBe(companyProps.profilePhotoPath);
   });
 
-  it('should return updatedAt when defined', (): void => {
-    const expectedDate = new Date('2023-10-09T12:00:00Z');
-    company['updatedAt'] = expectedDate;
+  it('should update a company name', (): void => {
+    const updatedCompany = CompanyDataBuilderProps.aCompany()
+      .withUpdatedName()
+      .build();
+    company.update(updatedCompany);
 
-    expect(company.getUpdatedAt).toBeDefined();
-    expect(company.getUpdatedAt).toBe(expectedDate);
+    expect(company.id).toBeDefined();
+    expect(company.getName).toBe(updatedCompany.name);
+    expect(company.getCreatedAt).not.toEqual(company.getUpdatedAt);
+  });
+
+  it('should update a company trade name', (): void => {
+    const updatedCompany = CompanyDataBuilderProps.aCompany()
+      .withUpdatedTradeName()
+      .build();
+    company.update(updatedCompany);
+
+    expect(company.id).toBeDefined();
+    expect(company.getTradeName).toBe(updatedCompany.tradeName);
+    expect(company.getCreatedAt).not.toEqual(company.getUpdatedAt);
+  });
+
+  it('should update a company email', (): void => {
+    const updatedCompany = CompanyDataBuilderProps.aCompany()
+      .withUpdatedEmail()
+      .build();
+    company.update(updatedCompany);
+
+    expect(company.id).toBeDefined();
+    expect(company.getEmail).toBe(updatedCompany.email);
+    expect(company.getCreatedAt).not.toEqual(company.getUpdatedAt);
+  });
+
+  it('should update a company cnpj', (): void => {
+    const updatedCompany = CompanyDataBuilderProps.aCompany()
+      .withUpdatedCnpj()
+      .build();
+    company.update(updatedCompany);
+
+    expect(company.id).toBeDefined();
+    expect(company.getCnpj).toBe(updatedCompany.cnpj);
+    expect(company.getCreatedAt).not.toEqual(company.getUpdatedAt);
+  });
+
+  it('should update a company contact person', (): void => {
+    const updatedCompany = CompanyDataBuilderProps.aCompany()
+      .withUpdatedContactPerson()
+      .build();
+    company.update(updatedCompany);
+
+    expect(company.id).toBeDefined();
+    expect(company.getContactPerson).toBe(updatedCompany.contactPerson);
+    expect(company.getCreatedAt).not.toEqual(company.getUpdatedAt);
+  });
+
+  it('should update a company contact whatsApp number', (): void => {
+    const updatedCompany = CompanyDataBuilderProps.aCompany()
+      .withUpdatedWhatsAppNumber()
+      .build();
+    company.update(updatedCompany);
+
+    expect(company.id).toBeDefined();
+    expect(company.getContactNumbers.whatsAppNumber).toBe(
+      updatedCompany.contactNumbers.whatsAppNumber,
+    );
+    expect(company.getCreatedAt).not.toEqual(company.getUpdatedAt);
+  });
+
+  it('should update a company contact mobile number', (): void => {
+    const updatedCompany = CompanyDataBuilderProps.aCompany()
+      .withUpdatedMobileNumber()
+      .build();
+    company.update(updatedCompany);
+
+    expect(company.id).toBeDefined();
+    expect(company.getContactNumbers.mobileNumber).toBe(
+      updatedCompany.contactNumbers.mobileNumber,
+    );
+    expect(company.getCreatedAt).not.toEqual(company.getUpdatedAt);
+  });
+
+  it('should update a company contact land line phone number', (): void => {
+    const updatedCompany = CompanyDataBuilderProps.aCompany()
+      .withUpdatedLandLinePhone()
+      .build();
+    company.update(updatedCompany);
+
+    expect(company.id).toBeDefined();
+    expect(company.getContactNumbers.landlinePhone).toBe(
+      updatedCompany.contactNumbers.landlinePhone,
+    );
+    expect(company.getCreatedAt).not.toEqual(company.getUpdatedAt);
+  });
+
+  it('should update a company profile photo path', (): void => {
+    const profilePhotoPath = 'https://www.test.com/updatedPhoto.jpg';
+    company.updateProfilePhotoPath(profilePhotoPath);
+
+    expect(company.id).toBeDefined();
+    expect(company.getProfilePhotoPath).toBe(profilePhotoPath);
+    expect(company.getCreatedAt).not.toEqual(company.getUpdatedAt);
   });
 });

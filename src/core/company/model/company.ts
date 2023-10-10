@@ -21,6 +21,7 @@ export type CompanyProps = {
   address: AddressProps;
   profilePhotoPath: string;
   createdAt?: Date;
+  updatedAt?: Date;
 };
 
 export class Company extends BaseEntity {
@@ -31,7 +32,7 @@ export class Company extends BaseEntity {
   private _contactPerson: string;
   private _contactNumbers: ContactNumbers;
   private _address: Address;
-  private profilePhotoPath: PhotoProfilePath;
+  private _profilePhotoPath: PhotoProfilePath;
   private _createdAt?: Date;
   private _updatedAt?: Date;
 
@@ -45,8 +46,9 @@ export class Company extends BaseEntity {
     this._contactPerson = props.contactPerson;
     this._contactNumbers = new ContactNumbers(props.contactNumbers);
     this._address = new Address(props.address, props.address.coordinates);
-    this.profilePhotoPath = new PhotoProfilePath(props.profilePhotoPath);
+    this._profilePhotoPath = new PhotoProfilePath(props.profilePhotoPath);
     this._createdAt = props.createdAt || new Date();
+    this._updatedAt = null;
   }
 
   static create(personData: CompanyProps) {
@@ -66,7 +68,7 @@ export class Company extends BaseEntity {
   }
 
   public updateProfilePhotoPath(newProfilePhotoPath: string): void {
-    this.profilePhotoPath = new PhotoProfilePath(newProfilePhotoPath);
+    this._profilePhotoPath = new PhotoProfilePath(newProfilePhotoPath);
     this._updatedAt = new Date();
   }
 
@@ -99,7 +101,7 @@ export class Company extends BaseEntity {
   }
 
   public get getProfilePhotoPath(): string {
-    return this.profilePhotoPath.value;
+    return this._profilePhotoPath.value;
   }
 
   public get getCreatedAt(): Date {
