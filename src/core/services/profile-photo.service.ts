@@ -7,7 +7,6 @@ export class ProfilePhotoService {
   constructor(private readonly fileStorageService: FileStorageService) {}
 
   async getUrl(input: FileInput, folderName: string): Promise<string> {
-    console.log('chamou');
     const path = await this.fileStorageService.upload(input, folderName);
     return await this.fileStorageService.getUrl(path);
   }

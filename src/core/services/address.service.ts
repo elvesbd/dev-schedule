@@ -15,7 +15,6 @@ export class AddressService {
     const entityAddress = getAddressFunction(entity);
 
     if (entityAddress.changedAddress(address)) {
-      console.log('entrou no IF');
       coordinates = await this.mapsService.getCoordinates(address);
       address.coordinates = coordinates;
       return address;

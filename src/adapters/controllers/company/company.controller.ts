@@ -90,13 +90,10 @@ export class CompanyController {
   @UseInterceptors(FileInterceptor('file'))
   @Post()
   async registerCompany(
-    @Body('dto') dto: any,
+    @Body('dto') dto: RegisterCompanyDto,
     @UploadedFile() file: FileDto,
   ): Promise<CompanyVMResponse> {
-    const dtoJSON = JSON.parse(dto);
-
-    console.log(dtoJSON);
-    const company = await this.registerCompanyUseCase.handle(dtoJSON, file);
+    const company = await this.registerCompanyUseCase.handle(dto, file);
     return CompanyViewModel.toHTTP(company);
   }
 
