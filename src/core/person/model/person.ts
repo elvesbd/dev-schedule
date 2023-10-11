@@ -66,6 +66,7 @@ export class Person extends BaseEntity {
     this._profession = input.profession;
     this._contactNumbers = new ContactNumbers(input.contactNumbers);
     this._address = new Address(input.address, input.address.coordinates);
+    this._employer = input.employer;
     this._updatedAt = new Date();
   }
 

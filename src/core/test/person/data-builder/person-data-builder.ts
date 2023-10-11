@@ -75,6 +75,11 @@ export class PersonDataBuilderProps {
     return this;
   }
 
+  public withUpdatedEmployer(): this {
+    this.props.employer = 'Professor';
+    return this;
+  }
+
   public build(): PersonProps {
     return this.props;
   }

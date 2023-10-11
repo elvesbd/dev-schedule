@@ -121,4 +121,15 @@ describe('Person [model]', (): void => {
     expect(person.getProfilePhotoPath).toBe(profilePhotoPath);
     expect(person.getCreatedAt).not.toEqual(person.getUpdatedAt);
   });
+
+  it('should update a person employer', (): void => {
+    const updatedPerson = PersonDataBuilderProps.aPerson()
+      .withUpdatedEmployer()
+      .build();
+    person.update(updatedPerson);
+
+    expect(person.id).toBeDefined();
+    expect(person.getEmployer).toBe(updatedPerson.employer);
+    expect(person.getCreatedAt).not.toEqual(person.getUpdatedAt);
+  });
 });
