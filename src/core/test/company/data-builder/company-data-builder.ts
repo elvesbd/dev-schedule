@@ -1,4 +1,7 @@
 import { CompanyProps } from '@core/company/model';
+import { AddressDataBuilder } from '@core/test/shared/data-builders';
+
+const updatedAddress = AddressDataBuilder.aAddress().build();
 
 export class CompanyDataBuilderProps {
   private props: CompanyProps = {
@@ -68,6 +71,11 @@ export class CompanyDataBuilderProps {
 
   public withUpdatedLandLinePhone(): this {
     this.props.contactNumbers.landlinePhone = '8825570299';
+    return this;
+  }
+
+  public withUpdatedAddress(): this {
+    this.props.address = updatedAddress;
     return this;
   }
 

@@ -1,5 +1,8 @@
 import { Gender } from '@core/person/enum';
 import { PersonProps } from '@core/person/model/person';
+import { AddressDataBuilder } from '@core/test/shared/data-builders';
+
+const updatedAddress = AddressDataBuilder.aAddress().build();
 
 export class PersonDataBuilderProps {
   private props: PersonProps = {
@@ -19,6 +22,10 @@ export class PersonDataBuilderProps {
       state: 'MS',
       postalCode: '79043024',
       country: 'Brasil',
+      coordinates: {
+        lng: -28.1737325,
+        lat: -10.790115,
+      },
     },
     employer: '',
     profilePhotoPath: 'https://test.com/photo.jpg',
@@ -60,6 +67,11 @@ export class PersonDataBuilderProps {
 
   public withUpdatedMobileNumber(): this {
     this.props.contactNumbers.mobileNumber = '85997386661';
+    return this;
+  }
+
+  public withUpdatedAddress(): this {
+    this.props.address = updatedAddress;
     return this;
   }
 

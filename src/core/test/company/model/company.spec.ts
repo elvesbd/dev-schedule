@@ -1,7 +1,7 @@
 import { Company } from '@core/company/model';
 import { CompanyDataBuilderProps } from '../data-builder';
 
-describe('Company [entity]', (): void => {
+describe('Company [model]', (): void => {
   const companyProps = CompanyDataBuilderProps.aCompany().build();
   const company = Company.create(companyProps);
 
@@ -112,6 +112,17 @@ describe('Company [entity]', (): void => {
     expect(company.getContactNumbers.landlinePhone).toBe(
       updatedCompany.contactNumbers.landlinePhone,
     );
+    expect(company.getCreatedAt).not.toEqual(company.getUpdatedAt);
+  });
+
+  it('should update a company address', (): void => {
+    const updatedCompany = CompanyDataBuilderProps.aCompany()
+      .withUpdatedAddress()
+      .build();
+    company.update(updatedCompany);
+
+    expect(company.id).toBeDefined();
+    expect(company.getAddress).toEqual(updatedCompany.address);
     expect(company.getCreatedAt).not.toEqual(company.getUpdatedAt);
   });
 
