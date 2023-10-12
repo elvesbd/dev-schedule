@@ -1,6 +1,6 @@
 import { AddressProps } from '@core/shared/values-objects';
 
-export class AddressDataBuilder {
+export class AddressDataBuilderProps {
   private address: AddressProps = {
     street: 'Travessa dos Economiários',
     number: '442',
@@ -14,8 +14,8 @@ export class AddressDataBuilder {
     },
   };
 
-  public static aAddress(): AddressDataBuilder {
-    return new AddressDataBuilder();
+  public static aAddress(): AddressDataBuilderProps {
+    return new AddressDataBuilderProps();
   }
 
   public build(): AddressProps {

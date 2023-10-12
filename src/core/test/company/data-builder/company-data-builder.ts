@@ -1,7 +1,7 @@
 import { CompanyProps } from '@core/company/model';
-import { AddressDataBuilder } from '@core/test/shared/data-builders';
+import { AddressDataBuilderProps } from '@core/test/shared/data-builders';
 
-const updatedAddress = AddressDataBuilder.aAddress().build();
+const updatedAddress = AddressDataBuilderProps.aAddress().build();
 
 export class CompanyDataBuilderProps {
   private props: CompanyProps = {
