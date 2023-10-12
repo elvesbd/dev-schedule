@@ -18,6 +18,7 @@ export class RegisterPersonUseCase {
 
   async handle(input: RegisterPerson, fileInput: FileInput): Promise<Person> {
     const { email, address } = input;
+    console.log({ email, address });
     const foundPerson = await this.personRepository.searchByEmail(email);
     if (foundPerson) throw new PersonAlreadyRegisterException(email);
 
@@ -33,6 +34,7 @@ export class RegisterPersonUseCase {
       ...input,
       address: { ...address, coordinates },
     });
+    console.log(person);
     await this.personRepository.register(person);
     return person;
   }

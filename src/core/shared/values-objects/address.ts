@@ -19,7 +19,7 @@ export class Address {
   readonly country: string;
   readonly coordinates: Coordinates;
 
-  constructor(props: AddressProps, coord: CoordinateProps) {
+  constructor(props: AddressProps) {
     if (
       !props.street ||
       !props.number ||
@@ -71,7 +71,7 @@ export class Address {
     this.state = props.state;
     this.postalCode = props.postalCode;
     this.country = props.country;
-    this.coordinates = new Coordinates(coord);
+    this.coordinates = new Coordinates(props.coordinates);
   }
 
   private isEqual(newAddress: Partial<Address>): boolean {

@@ -45,7 +45,7 @@ export class Company extends BaseEntity {
     this._cnpj = new Document(props.cnpj);
     this._contactPerson = props.contactPerson;
     this._contactNumbers = new ContactNumbers(props.contactNumbers);
-    this._address = new Address(props.address, props.address.coordinates);
+    this._address = new Address(props.address);
     this._profilePhotoPath = new PhotoProfilePath(props.profilePhotoPath);
     this._createdAt = props.createdAt || new Date();
     this._updatedAt = null;
@@ -63,7 +63,7 @@ export class Company extends BaseEntity {
     this._cnpj = new Document(input.cnpj);
     this._contactPerson = input.contactPerson;
     this._contactNumbers = new ContactNumbers(input.contactNumbers);
-    this._address = new Address(input.address, input.address.coordinates);
+    this._address = new Address(input.address);
     this._updatedAt = new Date();
   }
 

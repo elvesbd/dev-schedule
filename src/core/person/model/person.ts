@@ -46,7 +46,7 @@ export class Person extends BaseEntity {
     this._gender = props.gender;
     this._profession = props.profession;
     this._contactNumbers = new ContactNumbers(props.contactNumbers);
-    this._address = new Address(props.address, props.address.coordinates);
+    this._address = new Address(props.address);
     this._profilePhotoPath = new PhotoProfilePath(props.profilePhotoPath);
     this._employer = props.employer;
     this._createdAt = props.createdAt || new Date();
@@ -65,7 +65,7 @@ export class Person extends BaseEntity {
     this._gender = input.gender;
     this._profession = input.profession;
     this._contactNumbers = new ContactNumbers(input.contactNumbers);
-    this._address = new Address(input.address, input.address.coordinates);
+    this._address = new Address(input.address);
     this._employer = input.employer;
     this._updatedAt = new Date();
   }

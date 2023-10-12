@@ -1,1 +1,1 @@
-export { AddressDataBuilder } from './address-data-builder';
+export { AddressDataBuilderProps } from './address-data-builder';
