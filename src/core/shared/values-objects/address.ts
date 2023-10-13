@@ -35,11 +35,7 @@ export class Address {
       throw new Error('A rua (street) deve ter entre 2 e 50 caracteres.');
     }
 
-    if (
-      props.number.length < 1 ||
-      props.number.length > 8 ||
-      isNaN(Number(props.number))
-    ) {
+    if (props.number.length > 8 || isNaN(Number(props.number))) {
       throw new Error(
         'O número (number) deve ter entre 1 e 8 caracteres e ser um número válido.',
       );
