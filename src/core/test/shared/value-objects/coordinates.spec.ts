@@ -9,7 +9,7 @@ describe('Coordinates [value object]', () => {
     props = CoordinatesDataBuilderProps.aCoordinates().build();
   });
 
-  test('deve lançar um erro se a longitude não for um número válido', () => {
+  test('should throw an error if longitude is not a valid number', () => {
     props.lng = 'invalid' as any;
 
     expect(() => new Coordinates(props)).toThrow(
@@ -17,7 +17,7 @@ describe('Coordinates [value object]', () => {
     );
   });
 
-  test('deve lançar um erro se a latitude não for um número válido', () => {
+  test('should throw an error if latitude is not a valid number', () => {
     props.lat = 'invalid' as any;
 
     expect(() => new Coordinates(props)).toThrow(
