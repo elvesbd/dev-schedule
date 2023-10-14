@@ -53,4 +53,12 @@ describe('Contact Numbers [value object]', () => {
       'O número de telefone fixo deve ter exatamente 10 caracteres e deve conter apenas números.',
     );
   });
+
+  it('should be create an contact numbers with success', (): void => {
+    const contactNumbers = new ContactNumbers(props);
+
+    expect(contactNumbers).toBeInstanceOf(ContactNumbers);
+    expect(contactNumbers.whatsAppNumber).toBe(props.whatsAppNumber)
+    expect(contactNumbers.mobileNumber).toBe(props.mobileNumber)
+  });
 });
