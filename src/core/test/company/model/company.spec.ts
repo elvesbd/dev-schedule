@@ -1,8 +1,8 @@
 import { Company } from '@core/company/model';
-import { CompanyDataBuilderProps } from '../data-builder';
+import { CompanyDataBuilder } from '../data-builder';
 
 describe('Company [model]', (): void => {
-  const companyProps = CompanyDataBuilderProps.aCompany().build();
+  const companyProps = CompanyDataBuilder.aCompany().build();
   const company = Company.create(companyProps);
 
   beforeEach(() => {
@@ -22,7 +22,7 @@ describe('Company [model]', (): void => {
   });
 
   it('should update a company name', (): void => {
-    const updatedCompany = CompanyDataBuilderProps.aCompany()
+    const updatedCompany = CompanyDataBuilder.aCompany()
       .withUpdatedName()
       .build();
     company.update(updatedCompany);
@@ -33,7 +33,7 @@ describe('Company [model]', (): void => {
   });
 
   it('should update a company trade name', (): void => {
-    const updatedCompany = CompanyDataBuilderProps.aCompany()
+    const updatedCompany = CompanyDataBuilder.aCompany()
       .withUpdatedTradeName()
       .build();
     company.update(updatedCompany);
@@ -44,7 +44,7 @@ describe('Company [model]', (): void => {
   });
 
   it('should update a company email', (): void => {
-    const updatedCompany = CompanyDataBuilderProps.aCompany()
+    const updatedCompany = CompanyDataBuilder.aCompany()
       .withUpdatedEmail()
       .build();
     company.update(updatedCompany);
@@ -55,7 +55,7 @@ describe('Company [model]', (): void => {
   });
 
   it('should update a company cnpj', (): void => {
-    const updatedCompany = CompanyDataBuilderProps.aCompany()
+    const updatedCompany = CompanyDataBuilder.aCompany()
       .withUpdatedCnpj()
       .build();
     company.update(updatedCompany);
@@ -66,7 +66,7 @@ describe('Company [model]', (): void => {
   });
 
   it('should update a company contact person', (): void => {
-    const updatedCompany = CompanyDataBuilderProps.aCompany()
+    const updatedCompany = CompanyDataBuilder.aCompany()
       .withUpdatedContactPerson()
       .build();
     company.update(updatedCompany);
@@ -77,7 +77,7 @@ describe('Company [model]', (): void => {
   });
 
   it('should update a company contact whatsApp number', (): void => {
-    const updatedCompany = CompanyDataBuilderProps.aCompany()
+    const updatedCompany = CompanyDataBuilder.aCompany()
       .withUpdatedWhatsAppNumber()
       .build();
     company.update(updatedCompany);
@@ -90,7 +90,7 @@ describe('Company [model]', (): void => {
   });
 
   it('should update a company contact mobile number', (): void => {
-    const updatedCompany = CompanyDataBuilderProps.aCompany()
+    const updatedCompany = CompanyDataBuilder.aCompany()
       .withUpdatedMobileNumber()
       .build();
     company.update(updatedCompany);
@@ -103,7 +103,7 @@ describe('Company [model]', (): void => {
   });
 
   it('should update a company contact land line phone number', (): void => {
-    const updatedCompany = CompanyDataBuilderProps.aCompany()
+    const updatedCompany = CompanyDataBuilder.aCompany()
       .withUpdatedLandLinePhone()
       .build();
     company.update(updatedCompany);
@@ -116,7 +116,7 @@ describe('Company [model]', (): void => {
   });
 
   it('should update a company address', (): void => {
-    const updatedCompany = CompanyDataBuilderProps.aCompany()
+    const updatedCompany = CompanyDataBuilder.aCompany()
       .withUpdatedAddress()
       .build();
     company.update(updatedCompany);

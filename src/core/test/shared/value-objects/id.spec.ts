@@ -8,7 +8,6 @@ describe('Id [value object]', () => {
 
   it('should throw an error if ID value is not a valid', () => {
     const value = IdDataBuilder.aId().withInvalidID().build();
-
     expect(() => new Id(value)).toThrow('Invalid Id');
   });
 

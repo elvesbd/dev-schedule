@@ -1,9 +1,9 @@
 import { CompanyProps } from '@core/company/model';
-import { AddressDataBuilderProps } from '@core/test/shared/data-builders';
+import { AddressDataBuilder } from '@core/test/shared/data-builders';
 
-const updatedAddress = AddressDataBuilderProps.aAddress().build();
+const updatedAddress = AddressDataBuilder.aAddress().build();
 
-export class CompanyDataBuilderProps {
+export class CompanyDataBuilder {
   private props: CompanyProps = {
     name: 'Vitor e Helena Pizzaria Delivery ME',
     tradeName: 'Pizzaria Premiata',
@@ -30,8 +30,8 @@ export class CompanyDataBuilderProps {
     profilePhotoPath: 'https://www.test.com/photo.jpg',
   };
 
-  public static aCompany(): CompanyDataBuilderProps {
-    return new CompanyDataBuilderProps();
+  public static aCompany(): CompanyDataBuilder {
+    return new CompanyDataBuilder();
   }
 
   public withUpdatedName(): this {

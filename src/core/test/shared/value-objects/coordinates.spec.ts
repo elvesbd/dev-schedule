@@ -1,12 +1,12 @@
 import { CoordinateProps, Coordinates } from '@core/shared/values-objects';
-import { CoordinatesDataBuilderProps } from '../data-builders';
+import { CoordinatesDataBuilder } from '../data-builders';
 
 describe('Coordinates [value object]', () => {
   let props: CoordinateProps;
 
   beforeEach(() => {
     jest.clearAllMocks();
-    props = CoordinatesDataBuilderProps.aCoordinates().build();
+    props = CoordinatesDataBuilder.aCoordinates().build();
   });
 
   test('should throw an error if longitude is not a valid number', () => {

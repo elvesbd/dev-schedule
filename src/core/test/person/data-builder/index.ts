@@ -1,1 +1,1 @@
-export { PersonDataBuilderProps } from './person-data-builder';
+export { PersonDataBuilder } from './person-data-builder';

@@ -1,10 +1,10 @@
 import { Gender } from '@core/person/enum';
 import { PersonProps } from '@core/person/model/person';
-import { AddressDataBuilderProps } from '@core/test/shared/data-builders';
+import { AddressDataBuilder } from '@core/test/shared/data-builders';
 
-const updatedAddress = AddressDataBuilderProps.aAddress().build();
+const updatedAddress = AddressDataBuilder.aAddress().build();
 
-export class PersonDataBuilderProps {
+export class PersonDataBuilder {
   private props: PersonProps = {
     name: 'Yasmin Manuela Farias Lima',
     email: 'yasminmanuelafarias@capgemini.com',
@@ -31,8 +31,8 @@ export class PersonDataBuilderProps {
     profilePhotoPath: 'https://test.com/photo.jpg',
   };
 
-  public static aPerson(): PersonDataBuilderProps {
-    return new PersonDataBuilderProps();
+  public static aPerson(): PersonDataBuilder {
+    return new PersonDataBuilder();
   }
 
   public withUpdatedName(): this {

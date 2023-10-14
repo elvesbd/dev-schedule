@@ -2,14 +2,14 @@ import {
   ContactNumbers,
   ContactNumbersProps,
 } from '@core/shared/values-objects';
-import { ContactNumbersDataBuilderProps } from '../data-builders';
+import { ContactNumbersDataBuilder } from '../data-builders';
 
 describe('Contact Numbers [value object]', () => {
   let props: ContactNumbersProps;
 
   beforeEach(() => {
     jest.clearAllMocks();
-    props = ContactNumbersDataBuilderProps.aContactNumbers().build();
+    props = ContactNumbersDataBuilder.aContactNumbers().build();
   });
 
   it('should throw an error if the WhatsApp number is different than 11 digits', (): void => {

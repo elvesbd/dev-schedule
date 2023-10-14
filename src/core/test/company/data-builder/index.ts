@@ -1,1 +1,1 @@
-export { CompanyDataBuilderProps } from './company-data-builder';
+export { CompanyDataBuilder } from './company-data-builder';

@@ -1,8 +1,8 @@
-import { PersonDataBuilderProps } from '../data-builder';
+import { PersonDataBuilder } from '../data-builder';
 import { Person } from '@core/person/model';
 
 describe('Person [model]', (): void => {
-  const personProps = PersonDataBuilderProps.aPerson().build();
+  const personProps = PersonDataBuilder.aPerson().build();
   const person = Person.create(personProps);
 
   beforeEach(() => {
@@ -22,7 +22,7 @@ describe('Person [model]', (): void => {
   });
 
   it('should update a person name', (): void => {
-    const updatedPerson = PersonDataBuilderProps.aPerson()
+    const updatedPerson = PersonDataBuilder.aPerson()
       .withUpdatedName()
       .build();
     person.update(updatedPerson);
@@ -33,7 +33,7 @@ describe('Person [model]', (): void => {
   });
 
   it('should update a person email', (): void => {
-    const updatedPerson = PersonDataBuilderProps.aPerson()
+    const updatedPerson = PersonDataBuilder.aPerson()
       .withUpdatedEmail()
       .build();
     person.update(updatedPerson);
@@ -44,7 +44,7 @@ describe('Person [model]', (): void => {
   });
 
   it('should update a person gender', (): void => {
-    const updatedPerson = PersonDataBuilderProps.aPerson()
+    const updatedPerson = PersonDataBuilder.aPerson()
       .withUpdatedGender()
       .build();
     person.update(updatedPerson);
@@ -55,7 +55,7 @@ describe('Person [model]', (): void => {
   });
 
   it('should update a person date of birth', (): void => {
-    const updatedPerson = PersonDataBuilderProps.aPerson()
+    const updatedPerson = PersonDataBuilder.aPerson()
       .withUpdatedDateOfBirth()
       .build();
     person.update(updatedPerson);
@@ -66,7 +66,7 @@ describe('Person [model]', (): void => {
   });
 
   it('should update a person profession', (): void => {
-    const updatedPerson = PersonDataBuilderProps.aPerson()
+    const updatedPerson = PersonDataBuilder.aPerson()
       .withUpdatedProfession()
       .build();
     person.update(updatedPerson);
@@ -77,7 +77,7 @@ describe('Person [model]', (): void => {
   });
 
   it('should update a person whatsApp number', (): void => {
-    const updatedPerson = PersonDataBuilderProps.aPerson()
+    const updatedPerson = PersonDataBuilder.aPerson()
       .withUpdatedWhatsAppNumber()
       .build();
     person.update(updatedPerson);
@@ -90,7 +90,7 @@ describe('Person [model]', (): void => {
   });
 
   it('should update a person mobile number', (): void => {
-    const updatedPerson = PersonDataBuilderProps.aPerson()
+    const updatedPerson = PersonDataBuilder.aPerson()
       .withUpdatedMobileNumber()
       .build();
     person.update(updatedPerson);
@@ -103,7 +103,7 @@ describe('Person [model]', (): void => {
   });
 
   it('should update a person address', (): void => {
-    const updatedPerson = PersonDataBuilderProps.aPerson()
+    const updatedPerson = PersonDataBuilder.aPerson()
       .withUpdatedAddress()
       .build();
     person.update(updatedPerson);
@@ -123,7 +123,7 @@ describe('Person [model]', (): void => {
   });
 
   it('should update a person employer', (): void => {
-    const updatedPerson = PersonDataBuilderProps.aPerson()
+    const updatedPerson = PersonDataBuilder.aPerson()
       .withUpdatedEmployer()
       .build();
     person.update(updatedPerson);
