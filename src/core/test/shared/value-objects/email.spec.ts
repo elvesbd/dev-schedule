@@ -15,6 +15,14 @@ describe('Email [value object]', () => {
   });
 
   it('should throw an error if email does not have a domain', () => {
+    const value = EmailDataBuilder.aEmail().withNotDomain().build();
+
+    expect(() => new Email(value)).toThrow(
+      'O endereço de e-mail fornecido não é válido.',
+    );
+  });
+
+  it('should throw an error if email does not have a user', () => {
     const value = EmailDataBuilder.aEmail().withNotUser().build();
 
     expect(() => new Email(value)).toThrow(
