@@ -58,7 +58,7 @@ describe('Contact Numbers [value object]', () => {
     const contactNumbers = new ContactNumbers(props);
 
     expect(contactNumbers).toBeInstanceOf(ContactNumbers);
-    expect(contactNumbers.whatsAppNumber).toBe(props.whatsAppNumber)
-    expect(contactNumbers.mobileNumber).toBe(props.mobileNumber)
+    expect(contactNumbers.whatsAppNumber).toBe(props.whatsAppNumber);
+    expect(contactNumbers.mobileNumber).toBe(props.mobileNumber);
   });
 });
