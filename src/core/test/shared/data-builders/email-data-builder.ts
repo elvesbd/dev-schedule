@@ -30,11 +30,6 @@ export class EmailDataBuilder {
     return this;
   }
 
-  withNotPointInDomain(): this {
-    this.value = 'john@exemplo';
-    return this;
-  }
-
   withMultipleAt(): this {
     this.value = 'john@exemplo@com';
     return this;
