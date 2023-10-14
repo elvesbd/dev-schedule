@@ -79,4 +79,17 @@ describe('Address [value object]', (): void => {
       'O número (number) deve ter entre 1 e 8 caracteres e ser um número válido.',
     );
   });
+
+  it('should be create an address with success', (): void => {
+    const address = new Address(props);
+
+    expect(address).toBeInstanceOf(Address);
+    expect(address.street).toBe(props.street)
+    expect(address.number).toBe(props.number)
+    expect(address.city).toBe(props.city)
+    expect(address.state).toBe(props.state)
+    expect(address.postalCode).toBe(props.postalCode)
+    expect(address.country).toBe(props.country)
+    expect(address.coordinates).toEqual(props.coordinates)
+  });
 });
