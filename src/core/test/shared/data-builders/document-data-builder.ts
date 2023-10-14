@@ -20,6 +20,11 @@ export class DocumentDataBuilder {
     return this;
   }
 
+  withInvalidCnpj(): this {
+    this.value = '12.345.678/000-00';
+    return this;
+  }
+
   public build(): string {
     return this.value;
   }
