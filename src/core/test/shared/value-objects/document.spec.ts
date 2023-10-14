@@ -6,12 +6,12 @@ describe('Document [value object]', () => {
     jest.clearAllMocks();
   });
 
-  test('should throw an error if CPF value is not a valid', () => {
+  it('should throw an error if CPF value is not a valid', () => {
     const value = DocumentDataBuilder.aDocument().withInvalidCpf().build();
     expect(() => new Document(value)).toThrow('Documento inválido');
   });
 
-  test('should throw an error if CNPJ value is not a valid', () => {
+  it('should throw an error if CNPJ value is not a valid', () => {
     const value = DocumentDataBuilder.aDocument().withInvalidCnpj().build();
     expect(() => new Document(value)).toThrow('Documento inválido');
   });
