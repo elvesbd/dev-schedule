@@ -12,7 +12,7 @@ describe('Document [value object]', () => {
   });
 
   test('should throw an error if CNPJ value is not a valid', () => {
-    const value = DocumentDataBuilder.aDocument().withInvalidCpf().build();
+    const value = DocumentDataBuilder.aDocument().withInvalidCnpj().build();
     expect(() => new Document(value)).toThrow('Documento inválido');
   });
 
