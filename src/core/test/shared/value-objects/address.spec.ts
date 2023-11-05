@@ -144,10 +144,9 @@ describe('Address [value object]', (): void => {
 
   it('should return error if the country has more than 50 characters', (): void => {
     const props = AddressDataBuilder.aAddress()
-      .withCountryLessThanThreeCharacters()
+      .withCountryMoreThanFiftyCharacters()
       .build();
 
-    props.country = 'Pais com o nome superior a 50 caracteres mão é permitido';
     expect(() => new Address(props)).toThrow(
       'O país (country) deve ter entre 3 e 50 caracteres.',
     );
