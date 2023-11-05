@@ -33,8 +33,12 @@ import {
     }),
   ],
   providers: [
-    SupaBaseFileStorageService,
     SupaBaseClientService,
+    SupaBaseFileStorageService,
+    {
+      provide: MapsService,
+      useClass: GoogleMapsService,
+    },
     {
       provide: PersonRepository,
       useClass: TypeORMPersonRepository,
@@ -47,18 +51,14 @@ import {
       provide: FileStorageService,
       useClass: SupaBaseFileStorageService,
     },
-    {
-      provide: MapsService,
-      useClass: GoogleMapsService,
-    },
   ],
   exports: [
+    MapsService,
     PersonRepository,
     CompanyRepository,
     FileStorageService,
-    MapsService,
-    SupaBaseFileStorageService,
     SupaBaseClientService,
+    SupaBaseFileStorageService,
   ],
 })
 export class ExternalModule {}
