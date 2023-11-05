@@ -11,10 +11,10 @@ export class DeleteCompanyUseCase {
   ) {}
 
   async handle(id: string): Promise<void> {
-    const person = await this.companyRepository.searchById(id);
-    if (!person) throw new CompanyNotFoundException(id);
+    const company = await this.companyRepository.searchById(id);
+    if (!company) throw new CompanyNotFoundException(id);
 
-    await this.fileStorageService.remove(person.getProfilePhotoPath);
+    await this.fileStorageService.remove(company.getProfilePhotoPath);
     await this.companyRepository.delete(id);
   }
 }
