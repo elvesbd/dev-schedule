@@ -52,7 +52,13 @@ describe('DeleteCompanyUseCase', () => {
   describe('handle()', () => {
     const id = 'df89b9ce-fd57-4e5b-b69c-2c5a62cc59cf';
 
-    it('should return an exception if company not found', async () => {
+    it('should be call companyRepository.SearchById with correct value', async () => {
+      await sut.handle(id);
+      expect(companyRepository.searchById).toHaveBeenCalledTimes(1);
+      expect(companyRepository.searchById).toHaveBeenCalledWith(id);
+    });
+
+    it('should be return an exception if company not found', async () => {
       jest.spyOn(companyRepository, 'searchById').mockResolvedValueOnce(null);
 
       await expect(sut.handle(id)).rejects.toThrow(
