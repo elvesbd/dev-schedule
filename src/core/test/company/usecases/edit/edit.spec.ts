@@ -6,6 +6,7 @@ import { CompanyRepository } from '@core/company/ports/repository';
 import { AddressService } from '@core/services';
 import { EditAddress } from '@core/shared/types';
 import { EditCompany } from '@core/company/usecases/edit/types';
+import { CompanyNotFoundException } from '@core/company/exceptions';
 
 describe('EditCompanyUseCase', () => {
   let sut: EditCompanyUseCase;
@@ -95,6 +96,14 @@ describe('EditCompanyUseCase', () => {
       await sut.handle(id, input);
       expect(companyRepository.searchById).toHaveBeenCalledTimes(1);
       expect(companyRepository.searchById).toHaveBeenCalledWith(id);
+    });
+
+    it('should be return an exception if company not found', async () => {
+      jest.spyOn(companyRepository, 'searchById').mockResolvedValueOnce(null);
+
+      await expect(sut.handle(id, input)).rejects.toThrow(
+        new CompanyNotFoundException(id),
+      );
     });
   });
 });
