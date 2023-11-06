@@ -12,7 +12,7 @@ describe('DeleteCompanyUseCase', () => {
   let fileStorageService: FileStorageService;
 
   const companyData = CompanyDataBuilder.aCompany().build();
-  const company = new Company(companyData)
+  const company = new Company(companyData);
 
   beforeEach(async () => {
     jest.clearAllMocks();
@@ -72,14 +72,14 @@ describe('DeleteCompanyUseCase', () => {
       await sut.handle(id);
       expect(fileStorageService.remove).toHaveBeenCalledTimes(1);
       expect(fileStorageService.remove).toHaveBeenCalledWith(
-        company.getProfilePhotoPath
-      )
+        company.getProfilePhotoPath,
+      );
     });
 
     it('should called companyRepository.delete with correct value', async () => {
       await sut.handle(id);
       expect(companyRepository.delete).toHaveBeenCalledTimes(1);
-      expect(companyRepository.delete).toHaveBeenCalledWith(id)
+      expect(companyRepository.delete).toHaveBeenCalledWith(id);
     });
   });
 });
