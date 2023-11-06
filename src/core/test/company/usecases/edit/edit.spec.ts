@@ -138,5 +138,16 @@ describe('EditCompanyUseCase', () => {
       expect(companyRepository.update).toHaveBeenCalledTimes(1);
       expect(companyRepository.update).toHaveBeenCalledWith(company);
     });
+
+    it('should be return an company updated when there is not address updated', async () => {
+      jest
+        .spyOn(addressService, 'updateCoordinatesIfChanged')
+        .mockResolvedValueOnce(null);
+
+      company.update(input);
+      const result = await sut.handle(id, input);
+
+      expect(result).toStrictEqual(company);
+    });
   });
 });
