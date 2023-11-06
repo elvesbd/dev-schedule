@@ -16,15 +16,15 @@ describe('EditCompanyUseCase', () => {
   const companyData = CompanyDataBuilder.aCompany().build();
   const company = new Company(companyData);
   const updatedAddress: EditAddress = {
-    street: 'Rua do Algodão',
-    number: '525',
+    street: 'Travessa do Rio',
+    number: '600',
     city: 'Salto',
     state: 'sp',
-    postalCode: '13329650',
+    postalCode: '13329420',
     country: 'Brasil',
     coordinates: {
-      lng: -48.1737514,
-      lat: -21.7901505,
+      lng: -48.1737145,
+      lat: -21.7901101,
     },
   };
 
@@ -116,6 +116,15 @@ describe('EditCompanyUseCase', () => {
         input.address,
         expect.any(Function),
       );
+    });
+
+    it('should be called companyRepository.update with correct values when the address is updated', async () => {
+      await sut.handle(id, input);
+      input.address = updatedAddress;
+      company.update(input);
+
+      expect(companyRepository.update).toHaveBeenCalledTimes(1);
+      expect(companyRepository.update).toHaveBeenCalledWith(company);
     });
   });
 });
