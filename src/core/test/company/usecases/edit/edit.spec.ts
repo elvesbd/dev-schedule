@@ -105,5 +105,17 @@ describe('EditCompanyUseCase', () => {
         new CompanyNotFoundException(id),
       );
     });
+
+    it('should be called addressService.updateCoordinatesIfChanged with correct values', async () => {
+      await sut.handle(id, input);
+      expect(addressService.updateCoordinatesIfChanged).toHaveBeenCalledTimes(
+        1,
+      );
+      expect(addressService.updateCoordinatesIfChanged).toHaveBeenCalledWith(
+        company,
+        input.address,
+        expect.any(Function),
+      );
+    });
   });
 });
