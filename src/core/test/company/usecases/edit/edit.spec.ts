@@ -118,11 +118,8 @@ describe('EditCompanyUseCase', () => {
       );
     });
 
-    it('should be called companyRepository.update with correct values when the address is updated', async () => {
+    it('should be called companyRepository.update with correct values', async () => {
       await sut.handle(id, input);
-      input.address = updatedAddress;
-      company.update(input);
-
       expect(companyRepository.update).toHaveBeenCalledTimes(1);
       expect(companyRepository.update).toHaveBeenCalledWith(company);
     });
@@ -133,21 +130,22 @@ describe('EditCompanyUseCase', () => {
         .mockResolvedValueOnce(null);
 
       await sut.handle(id, input);
-      company.update(input);
-
       expect(companyRepository.update).toHaveBeenCalledTimes(1);
       expect(companyRepository.update).toHaveBeenCalledWith(company);
     });
 
-    it('should be return an company updated when there is not address updated', async () => {
+    it('should not update the company address if it has not changed', async () => {
       jest
         .spyOn(addressService, 'updateCoordinatesIfChanged')
         .mockResolvedValueOnce(null);
 
-      company.update(input);
       const result = await sut.handle(id, input);
+      expect(result.getAddress).toEqual(company.getAddress);
+    });
 
-      expect(result).toStrictEqual(company);
+    it('should be return an company updated when there is not address updated', async () => {
+      const result = await sut.handle(id, input);
+      expect(result.getAddress).toEqual(updatedAddress);
     });
   });
 });
