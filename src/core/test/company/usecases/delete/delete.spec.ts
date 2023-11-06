@@ -75,5 +75,11 @@ describe('DeleteCompanyUseCase', () => {
         company.getProfilePhotoPath
       )
     });
+
+    it('should called companyRepository.delete with correct value', async () => {
+      await sut.handle(id);
+      expect(companyRepository.delete).toHaveBeenCalledTimes(1);
+      expect(companyRepository.delete).toHaveBeenCalledWith(id)
+    });
   });
 });
