@@ -4,13 +4,15 @@ import { CompanyRepository } from '@core/company/ports/repository';
 import { FileStorageService } from '@core/shared/ports/storage';
 import { CompanyDataBuilder } from '../../data-builder';
 import { CompanyNotFoundException } from '@core/company/exceptions';
+import { Company } from '@core/company/model';
 
 describe('DeleteCompanyUseCase', () => {
   let sut: DeleteCompanyUseCase;
   let companyRepository: CompanyRepository;
   let fileStorageService: FileStorageService;
 
-  const company = CompanyDataBuilder.aCompany().build();
+  const companyData = CompanyDataBuilder.aCompany().build();
+  const company = new Company(companyData)
 
   beforeEach(async () => {
     jest.clearAllMocks();
@@ -52,7 +54,7 @@ describe('DeleteCompanyUseCase', () => {
   describe('handle()', () => {
     const id = 'df89b9ce-fd57-4e5b-b69c-2c5a62cc59cf';
 
-    it('should be call companyRepository.SearchById with correct value', async () => {
+    it('should called companyRepository.searchById with correct value', async () => {
       await sut.handle(id);
       expect(companyRepository.searchById).toHaveBeenCalledTimes(1);
       expect(companyRepository.searchById).toHaveBeenCalledWith(id);
@@ -64,6 +66,14 @@ describe('DeleteCompanyUseCase', () => {
       await expect(sut.handle(id)).rejects.toThrow(
         new CompanyNotFoundException(id),
       );
+    });
+
+    it('should called fileStorageService.remove with correct value', async () => {
+      await sut.handle(id);
+      expect(fileStorageService.remove).toHaveBeenCalledTimes(1);
+      expect(fileStorageService.remove).toHaveBeenCalledWith(
+        company.getProfilePhotoPath
+      )
     });
   });
 });
