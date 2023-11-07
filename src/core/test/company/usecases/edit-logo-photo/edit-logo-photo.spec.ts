@@ -6,6 +6,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CompanyDataBuilder } from '../../data-builder';
 import { Company } from '@core/company/model';
 import { FileInput } from '@core/shared/types';
+import { CompanyNotFoundException } from '@core/company/exceptions';
 
 describe('EditLogoPhotoUseCase', () => {
   let sut: EditLogoPhotoUseCase;
@@ -79,6 +80,14 @@ describe('EditLogoPhotoUseCase', () => {
       await sut.handle(id, input);
       expect(companyRepository.searchById).toHaveBeenCalledTimes(1);
       expect(companyRepository.searchById).toHaveBeenCalledWith(id);
+    });
+
+    it('should be return an exception if company not found', async () => {
+      jest.spyOn(companyRepository, 'searchById').mockResolvedValueOnce(null);
+
+      await expect(sut.handle(id, input)).rejects.toThrow(
+        new CompanyNotFoundException(id),
+      );
     });
   });
 });
