@@ -89,5 +89,14 @@ describe('EditLogoPhotoUseCase', () => {
         new CompanyNotFoundException(id),
       );
     });
+
+    it('should be called fileStorageService.remove with correct value', async () => {
+      await sut.handle(id, input);
+
+      expect(fileStorageService.remove).toHaveBeenCalledTimes(1);
+      expect(fileStorageService.remove).toHaveBeenCalledWith(
+        company.getProfilePhotoPath,
+      );
+    });
   });
 });
