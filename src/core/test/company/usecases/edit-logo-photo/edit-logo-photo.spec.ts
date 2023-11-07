@@ -27,14 +27,14 @@ describe('EditLogoPhotoUseCase', () => {
       provide: CompanyRepository,
       useValue: {
         searchById: jest.fn().mockResolvedValue(company),
-        update: jest.fn().mockResolvedValue(void 0),
+        update: jest.fn().mockResolvedValue(undefined),
       },
     };
 
     const FileStorageServiceProvider = {
       provide: FileStorageService,
       useValue: {
-        remove: jest.fn().mockResolvedValue(void 0),
+        remove: jest.fn().mockResolvedValue(undefined),
       },
     };
 
@@ -71,7 +71,7 @@ describe('EditLogoPhotoUseCase', () => {
     const id = 'df89b9ce-fd57-4e5b-b69c-2c5a62cc59cf';
     const input: FileInput = {
       fieldname: 'file',
-      originalname: 'plugin_dotnet.png',
+      originalname: 'image.png',
       mimetype: 'image/png',
       buffer: Buffer.from([0x01, 0x02, 0x03]),
       size: 3,
@@ -108,6 +108,11 @@ describe('EditLogoPhotoUseCase', () => {
         input,
         COMPANY_FOLDER,
       );
+    });
+
+    it('should be return profilePhotPath updated', async () => {
+      await sut.handle(id, input);
+      expect(company.getProfilePhotoPath).toBe(profilePhotoPath);
     });
   });
 });
