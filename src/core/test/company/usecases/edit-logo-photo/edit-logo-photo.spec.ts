@@ -5,6 +5,7 @@ import { FileStorageService } from '@core/shared/ports/storage';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CompanyDataBuilder } from '../../data-builder';
 import { Company } from '@core/company/model';
+import { FileInput } from '@core/shared/types';
 
 describe('EditLogoPhotoUseCase', () => {
   let sut: EditLogoPhotoUseCase;
@@ -65,6 +66,19 @@ describe('EditLogoPhotoUseCase', () => {
   });
 
   describe('handle()', () => {
-    it('should ', () => {});
+    const id = 'df89b9ce-fd57-4e5b-b69c-2c5a62cc59cf';
+    const input: FileInput = {
+      fieldname: 'file',
+      originalname: 'plugin_dotnet.png',
+      mimetype: 'image/png',
+      buffer: Buffer.from([0x01, 0x02, 0x03]),
+      size: 3,
+    };
+
+    it('should be called companyRepository.searchById with correct values', async () => {
+      await sut.handle(id, input);
+      expect(companyRepository.searchById).toHaveBeenCalledTimes(1);
+      expect(companyRepository.searchById).toHaveBeenCalledWith(id);
+    });
   });
 });
