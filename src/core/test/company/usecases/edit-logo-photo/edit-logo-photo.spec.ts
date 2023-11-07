@@ -7,6 +7,7 @@ import { CompanyDataBuilder } from '../../data-builder';
 import { Company } from '@core/company/model';
 import { FileInput } from '@core/shared/types';
 import { CompanyNotFoundException } from '@core/company/exceptions';
+import { COMPANY_FOLDER } from '@core/company/usecases/constants';
 
 describe('EditLogoPhotoUseCase', () => {
   let sut: EditLogoPhotoUseCase;
@@ -96,6 +97,16 @@ describe('EditLogoPhotoUseCase', () => {
       expect(fileStorageService.remove).toHaveBeenCalledTimes(1);
       expect(fileStorageService.remove).toHaveBeenCalledWith(
         company.getProfilePhotoPath,
+      );
+    });
+
+    it('should be called profilePhotoService.getUrl with correct values', async () => {
+      await sut.handle(id, input);
+
+      expect(profilePhotoService.getUrl).toHaveBeenCalledTimes(1);
+      expect(profilePhotoService.getUrl).toHaveBeenCalledWith(
+        input,
+        COMPANY_FOLDER,
       );
     });
   });
