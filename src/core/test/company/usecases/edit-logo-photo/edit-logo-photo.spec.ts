@@ -114,5 +114,11 @@ describe('EditLogoPhotoUseCase', () => {
       await sut.handle(id, input);
       expect(company.getProfilePhotoPath).toBe(profilePhotoPath);
     });
+
+    it('should be return called companyRepository.update with correct value', async () => {
+      await sut.handle(id, input);
+      expect(companyRepository.update).toHaveBeenCalledTimes(1);
+      expect(companyRepository.update).toHaveBeenCalledWith(company);
+    });
   });
 });
